@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time of Day Progress Meter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        #container {
+            text-align: center;
+        }
+        #progressBar {
+            width: 100%;
+            background-color: #ddd;
+        }
+        #progress {
+            width: 1%;
+            height: 30px;
+            background-color: #4caf50;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Time of Day Progress Meter</h1>
+        <div id="progressBar">
+            <div id="progress">0%</div>
+        </div>
+        <p id="timeDisplay"></p>
+    </div>
+
+    <script>
+        function updateProgress() {
+            const startTime = new Date();
+            startTime.setHours(7, 0, 0, 0); // 7:00 AM
+
+            const endTime = new Date();
+            endTime.setHours(21, 0, 0, 0); // 9:00 PM
+
+            const now = new Date();
+            const nowCT = new Date(now.toLocaleString("en-US", { timeZone: "America/Chicago" }));
+
+            if (nowCT >= startTime && nowCT <= endTime) {
+                const totalTime = endTime - startTime;
+                const elapsedTime = nowCT - startTime;
+                const progress = (elapsedTime / totalTime) * 100;
+
+                document.getElementById("progress").style.width = progress + "%";
+                document.getElementById("progress").innerText = Math.floor(progress) + "%";
+                document.getElementById("timeDisplay").innerText = "Current Time (CT): " + nowCT.toLocaleTimeString();
+            } else {
+                document.getElementById("progress").style.width = "0%";
+                document.getElementById("progress").innerText = "0%";
+                document.getElementById("timeDisplay").innerText = "Outside the 7 AM to 9 PM window (CT)";
+            }
+        }
+
+        setInterval(updateProgress, 1000); // Update every second
+        updateProgress(); // Initial call
+    </script>
+</body>
+</html>
