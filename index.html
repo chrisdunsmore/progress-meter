@@ -35,7 +35,7 @@
     <div id="container">
         <h1>Time of Day Progress Meter</h1>
         <div id="progressBar">
-            <div id="progress">0%</div>
+            <div id="progress">0.00%</div>
         </div>
         <p id="timeDisplay"></p>
     </div>
@@ -56,12 +56,13 @@
                 const elapsedTime = nowCT - startTime;
                 const progress = (elapsedTime / totalTime) * 100;
 
-                document.getElementById("progress").style.width = progress + "%";
-                document.getElementById("progress").innerText = Math.floor(progress) + "%";
+                const progressBar = document.getElementById("progress");
+                progressBar.style.width = progress.toFixed(2) + "%";
+                progressBar.innerText = progress.toFixed(2) + "%";
                 document.getElementById("timeDisplay").innerText = "Current Time (CT): " + nowCT.toLocaleTimeString();
             } else {
                 document.getElementById("progress").style.width = "0%";
-                document.getElementById("progress").innerText = "0%";
+                document.getElementById("progress").innerText = "0.00%";
                 document.getElementById("timeDisplay").innerText = "Outside the 7 AM to 9 PM window (CT)";
             }
         }
