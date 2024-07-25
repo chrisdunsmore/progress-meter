@@ -57,12 +57,12 @@
                 const progress = (elapsedTime / totalTime) * 100;
 
                 const progressBar = document.getElementById("progress");
-                progressBar.style.width = progress.toFixed(2) + "%";
-                progressBar.innerText = progress.toFixed(2) + "%";
+                progressBar.style.width = progress.toFixed(3) + "%";
+                progressBar.innerText = progress.toFixed(3) + "%";
                 document.getElementById("timeDisplay").innerText = "Current Time (CT): " + nowCT.toLocaleTimeString();
             } else {
                 document.getElementById("progress").style.width = "0%";
-                document.getElementById("progress").innerText = "0.00%";
+                document.getElementById("progress").innerText = "0.000%";
                 document.getElementById("timeDisplay").innerText = "Outside the 7 AM to 9 PM window (CT)";
             }
         }
